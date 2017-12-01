@@ -1,0 +1,83 @@
+\documentclass[english]{tudscrtechrep}
+
+\addbibresource{references.bib}
+
+\usepackage[math]{blindtext}
+
+\title{\detokenizeforpdf{An Exemplary Technical Report with the Formula
+$\mathbf{P}\cap\mathbf{NP}=\emptyset$ in its Title}}
+\subtitle{LTCS-Report 17-XY}
+\author{%
+  A Researcher%
+  \authormore{a.researcher@tu-dresden.de}%
+  \thanks{A footnote}%
+  \and%
+  Another Researcher%
+  \authormore{another.researcher@tu-dresden.de}%
+  \thanks{Another footnote}%
+}
+\abstract{\blindtext}
+\keywords{keyword 1, keyword two, and a third keyword}
+% \date{1.1.1980}
+\extendedversionof{exemplary-article}
+
+\begin{document}
+
+\Blinddocument
+\Blinddocument
+
+\chapter{\detokenizeforpdf{Formula: $\mathcal{F}=\int_{T}f\circ f'\,\mathrm{d}\mu$}}
+
+Please enclose sectioning titles with formulae as an argument of \verb|\detokenizeforpdf| in order to
+have the formulae detokenized for the pdf table of contents, like in this chapter's title.
+
+\chapter{Some Formulae}
+
+\section{We test the display of mathematical and logical formulae}
+
+\begin{definition}
+  We define $\mathcal{F}$ to denote the set of all empty sets.
+\end{definition}
+
+It is readily verified that $\mathcal{F}$ contains exactly one element.
+
+\begin{lemma}
+  $\mathcal{F}\not\in\mathcal{F}$.
+\end{lemma}
+
+\begin{theorem}
+  Let foo be a bar.  Then the following statement does not hold true.
+  \begin{alignat*}{1}
+    f&\colon x\mapsto3\\
+    \mathcal{H}&\coloneqq\{\,x\mid x\text{ is not a baz.}\,\}
+  \end{alignat*}
+  Furthermore, $f$ is not $g$.
+\end{theorem}
+
+\begin{proof}
+  Obviously, the so-called theorem does not contain any statement, but just bullshit.  Thus, there
+  is nothing to show at all.
+\end{proof}
+
+\begin{proof}[of~Theorem~A]
+  We start with demonstrating the following claim.
+  \begin{claim}
+    Insert a random claim here!
+  \end{claim}
+  Obviously, the so-called theorem does not contain any statement, but just bullshit.  Thus, there
+  is nothing to show at all.
+\end{proof}
+
+\begin{citetheorem}[{\autocite[Theorem~5723]{exemplary-article}}]
+  \blindtext
+\end{citetheorem}
+
+\begin{claim}
+  Insert a random claim here!
+\end{claim}
+
+\begin{citation*}[{\autocite[Some~Theorem]{exemplary-article}}]
+  \blindtext
+\end{citation*}
+
+\end{document}
