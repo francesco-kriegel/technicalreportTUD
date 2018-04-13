@@ -5,7 +5,8 @@
 
 \ProvidesClass{tudscrtechrep}[2017/11/12 LaTeX Class for Technical Reports in TUD Corporate Design (based on KOMA-Script class tudscrreprt)]
 
-\LoadClass[cdmath=off,cd=bicolor,cdfoot=true,abstract=heading,abstract=notoc]{tudscrreprt}
+\LoadClass[cdmath=off,cdfont=off,cd=bicolor,cdfoot=true,abstract=heading,abstract=notoc]{tudscrreprt}
+\RequirePackage[default,scale=0.95]{opensans}
 
 %\RequirePackage{selinput}\SelectInputMappings{adieresis={ä},germandbls={ß}}
 \RequirePackage[T1]{fontenc}
@@ -24,7 +25,6 @@
 \RequirePackage[all=normal,indent,floats,wordspacing,leading,charwidths,tracking,paragraphs]{savetrees}
 \RequirePackage{mathtools}
 \RequirePackage{etoolbox}
-\RequirePackage{mathpazo}
 \RequirePackage{environ}
 \RequirePackage{scalerel}
 \RequirePackage{multicol}
@@ -33,11 +33,27 @@
 \linespread{1.2}
 % \def\arraystretch{1.3}
 
+\newif\if@sansmath
+\@sansmathfalse
+\DeclareOption{sansmath}{\@sansmathtrue}
+
+\newif\if@mathpazo
+\@mathpazofalse
+\DeclareOption{mathpazo}{\@mathpazotrue}
+
 \newif\if@german
 \@germanfalse
 \DeclareOption{german}{\@germantrue}
 
 \ProcessOptions\relax
+
+\if@sansmath
+  \RequirePackage{sfmath}
+\fi
+
+\if@mathpazo
+  \RequirePackage{mathpazo}
+\fi
 
 \RequirePackage{csquotes}
 \RequirePackage[
@@ -62,6 +78,7 @@
 % Theorema    Theoremata
 % Corollarium Corollaria
 % Approbatio  Approbationes
+% Effatum     Effata
 
 \newtheoremstyle{plain}
   {\topsep}   % ABOVESPACE
@@ -110,12 +127,38 @@
 \crefmultiformat{corollary}{Corollaria~#2#1#3}{ and~#2#1#3}{, #2#1#3}{, and~#2#1#3}
 \Crefmultiformat{corollary}{Corollaria~#2#1#3}{ and~#2#1#3}{, #2#1#3}{, and~#2#1#3}
 
-\newtheorem{claim}[definition]{Claim}
-\newtheorem*{claim*}{Claim}
-\crefformat{claim}{Claim~#2#1#3}
-\Crefformat{claim}{Claim~#2#1#3}
-\crefmultiformat{claim}{Claims~#2#1#3}{ and~#2#1#3}{, #2#1#3}{, and~#2#1#3}
-\Crefmultiformat{claim}{Claims~#2#1#3}{ and~#2#1#3}{, #2#1#3}{, and~#2#1#3}
+\newtheorem{claim}[definition]{Effatum}
+\newtheorem*{claim*}{Effatum}
+\crefformat{claim}{Effatum~#2#1#3}
+\Crefformat{claim}{Effatum~#2#1#3}
+\crefmultiformat{claim}{Effata~#2#1#3}{ and~#2#1#3}{, #2#1#3}{, and~#2#1#3}
+\Crefmultiformat{claim}{Effata~#2#1#3}{ and~#2#1#3}{, #2#1#3}{, and~#2#1#3}
+
+\newtheorem{problem}[definition]{Problema}
+\newtheorem*{problem*}{Problema}
+\crefformat{problem}{Problema~#2#1#3}
+\Crefformat{problem}{Problema~#2#1#3}
+\crefmultiformat{problem}{Problemata~#2#1#3}{ and~#2#1#3}{, #2#1#3}{, and~#2#1#3}
+\Crefmultiformat{problem}{Problemata~#2#1#3}{ and~#2#1#3}{, #2#1#3}{, and~#2#1#3}
+
+\newtheorem{example}[definition]{Exemplum}
+\newtheorem*{example*}{Exemplum}
+\crefformat{example}{Exemplum~#2#1#3}
+\Crefformat{example}{Exemplum~#2#1#3}
+\crefmultiformat{example}{Exempla~#2#1#3}{ and~#2#1#3}{, #2#1#3}{, and~#2#1#3}
+\Crefmultiformat{example}{Exempla~#2#1#3}{ and~#2#1#3}{, #2#1#3}{, and~#2#1#3}
+
+\newtheoremstyle{noparens}
+  {}
+  {}
+  {\itshape}
+  {}
+  {\bfseries}
+  {.}
+  {5pt plus 1pt minus 1pt}%{.5em}
+  {\thmnote{{#3}}}%{\thmname{#1}\thmnumber{ #2}\thmnote{ #3}}
+\theoremstyle{noparens}
+\newtheorem*{citethm}{Citation}
 
 \newtheoremstyle{proof}
   {\topsep}   % ABOVESPACE
@@ -240,5 +283,6 @@
   \def\authormore#1{}
   \def\thanks#1{}
   \def\and{, }
+  \def\newline{}
 }
 \newcommand{\detokenizeforpdf}[1]{\texorpdfstring{#1}{\detokenize{#1}}}
