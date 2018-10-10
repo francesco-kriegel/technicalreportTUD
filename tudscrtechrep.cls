@@ -22,16 +22,12 @@
 \RequirePackage{xspace}
 \RequirePackage{ifthen}
 \RequirePackage{verbatim}
-\RequirePackage[all=normal,indent,floats,wordspacing,leading,charwidths,tracking,paragraphs]{savetrees}
 \RequirePackage{mathtools}
 \RequirePackage{etoolbox}
 \RequirePackage{environ}
 \RequirePackage{scalerel}
 \RequirePackage{multicol}
 \RequirePackage{xparse}
-
-\linespread{1.2}
-% \def\arraystretch{1.3}
 
 \newif\if@sansmath
 \@sansmathfalse
@@ -45,6 +41,10 @@
 \@germanfalse
 \DeclareOption{german}{\@germantrue}
 
+\newif\if@dontsavetrees
+\@dontsavetreesfalse
+\DeclareOption{dontsavetrees}{\@dontsavetreestrue}
+
 \ProcessOptions\relax
 
 \if@sansmath
@@ -55,6 +55,13 @@
   \RequirePackage{mathpazo}
 \fi
 
+\if@dontsavetrees\else
+  \RequirePackage[all=normal,indent,floats,wordspacing,leading,charwidths,tracking,paragraphs]{savetrees}
+\fi
+
+\linespread{1.2}
+% \def\arraystretch{1.3}
+
 \RequirePackage{csquotes}
 \RequirePackage[
   backend=biber,
@@ -63,7 +70,8 @@
   doi=false,
   url=true,
   isbn=false,
-  mincrossrefs=99
+  mincrossrefs=99,
+  maxbibnames=99
 ]{biblatex}
 
 \RequirePackage{amsthm}
@@ -113,8 +121,8 @@
 \crefmultiformat{proposition}{Propositiones~#2#1#3}{ and~#2#1#3}{, #2#1#3}{, and~#2#1#3}
 \Crefmultiformat{proposition}{Propositiones~#2#1#3}{ and~#2#1#3}{, #2#1#3}{, and~#2#1#3}
 
-\newtheorem{theorem}[definition]{Theorem}
-\newtheorem*{theorem*}{Theorem}
+\newtheorem{theorem}[definition]{Theorema}
+\newtheorem*{theorem*}{Theorema}
 \crefformat{theorem}{Theorema~#2#1#3}
 \Crefformat{theorem}{Theorema~#2#1#3}
 \crefmultiformat{theorem}{Theoremata~#2#1#3}{ and~#2#1#3}{, #2#1#3}{, and~#2#1#3}
